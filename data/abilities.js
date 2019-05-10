@@ -4097,7 +4097,38 @@ let BattleAbilities = {
 		rating: -1,
 		num: 161,
 	},
-
+	"parasitization": {
+		desc: "This Pokemon's Normal-type moves become Bug-type moves and have their power multiplied by 1.2. This effect comes after other effects that change a move's type, but before Ion Deluge and Electrify's effects.",
+		shortDesc: "This Pokemon's Normal-type moves become Bug-type and have 1.2x power.",
+		onModifyMovePriority: -1,
+		onModifyMove(move, pokemon) {
+			if (move.type === 'Normal' && !['judgment', 'multiattack', 'naturalgift', 'revelationdance', 'technoblast', 'weatherball'].includes(move.id) && !(move.isZ && move.category !== 'Status')) {
+				move.type = 'Bug';
+				move.parasitizationBoosted = true;
+			}
+		},
+		onBasePowerPriority: 8,
+		onBasePower(basePower, pokemon, target, move) {
+			if (move.parasitizationBoosted) return this.chainModify([0x1333, 0x1000]);
+		},
+		id: "parasitization",
+		name: "Parasitization",
+		rating: 4,
+		num: 310,
+	},
+	"selfpride": {
+		desc: "This Pokemon's Sp.Atk is raised by 1 stage if it attacks and knocks out another Pokemon.",
+		shortDesc: "This Pokemon's Sp,Atk is raised by 1 stage if it attacks and KOes another Pokemon.",
+		onSourceFaint(target, source, effect) {
+			if (effect && effect.effectType === 'Move') {
+				this.boost({spa: 1}, source);
+			}
+		},
+		id: "selfpride",
+		name: "Self Pride",
+		rating: 3.5,
+		num: 311,
+	},
 	// CAP
 	"mountaineer": {
 		shortDesc: "On switch-in, this Pokemon avoids all Rock-type attacks and Stealth Rock.",
@@ -4162,25 +4193,6 @@ let BattleAbilities = {
 		// implemented in the corresponding move
 		rating: 3.5,
 		num: -4,
-	},
-	"parasitization": {
-		desc: "This Pokemon's Normal-type moves become Bug-type moves and have their power multiplied by 1.2. This effect comes after other effects that change a move's type, but before Ion Deluge and Electrify's effects.",
-		shortDesc: "This Pokemon's Normal-type moves become Bug-type and have 1.2x power.",
-		onModifyMovePriority: -1,
-		onModifyMove(move, pokemon) {
-			if (move.type === 'Normal' && !['judgment', 'multiattack', 'naturalgift', 'revelationdance', 'technoblast', 'weatherball'].includes(move.id) && !(move.isZ && move.category !== 'Status')) {
-				move.type = 'Bug';
-				move.parasitizationBoosted = true;
-			}
-		},
-		onBasePowerPriority: 8,
-		onBasePower(basePower, pokemon, target, move) {
-			if (move.parasitizationBoosted) return this.chainModify([0x1333, 0x1000]);
-		},
-		id: "parasitization",
-		name: "Parasitization",
-		rating: 4,
-		num: 310,
 	},
 };
 
