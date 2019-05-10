@@ -14240,6 +14240,21 @@ let BattlePokedex = {
 		color: "White",
 		eggGroups: ["Undiscovered"],
 	},
+	pryncice: {
+		num:810,
+		species: "Pryncice",
+		types: ["Ice", "Psychic"],
+		gender: "F",
+		baseStats: {hp: 75, atk: 20, def: 65, spa: 165, spd: 105, spe: 125},
+		abilities: {0: "Refrigerate", 1: "Snow Cloak", H: "Hydration"},
+		heightm: 1.6,
+		weightkg: 50.8,
+		color: "Red",
+		prevo: "jynx",
+		evoType: "stone",
+		evoItem: "Ice Stone",
+		eggGroups: ["Human-Like"],
+	},
 };
 
 exports.BattlePokedex = BattlePokedex;
