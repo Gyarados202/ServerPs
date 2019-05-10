@@ -6431,7 +6431,7 @@ let BattleItems = {
 	"psncureberry": {
 		id: "psncureberry",
 		name: "PSN Cure Berry",
-		spritenum: 333,
+		spritenum:400,
 		isBerry: true,
 		naturalGift: {
 			basePower: 80,
@@ -6452,6 +6452,34 @@ let BattleItems = {
 		isNonstandard: "Past",
 		desc: "(Gen 2) Holder is cured if it is poisoned. Single use.",
 	},
+        "flygonitex": {
+		id: "flygonitex",
+		name: "Flygonite X",
+		spritenum: 401,
+		megaStone: "Flygon-Mega-X",
+		megaEvolves: "Flygon",
+		onTakeItem(item, source) {
+			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
+			return true;
+		},
+		num: 7790,
+		gen: 6,
+		desc: "If held by a Flygon, this item allows it to Mega Evolve in battle.",
+	},
+	"flygonitey": {
+		id: "flygonitey",
+		name: "Flygonite Y",
+		spritenum: 585,
+		megaStone: "Flygon-Mega-Y",
+		megaEvolves: "Flygon",
+		onTakeItem(item, source) {
+			if (item.megaEvolves === source.baseTemplate.baseSpecies) return false;
+			return true;
+		},
+		num: 800,
+		gen: 8,
+		desc: "If held by a Flygon, this item allows it to Mega Evolve in battle.",
+	},
 
 	// CAP items
 
@@ -6470,6 +6498,6 @@ let BattleItems = {
 		isNonstandard: "CAP",
 		desc: "If held by a Crucibelle, this item allows it to Mega Evolve in battle.",
 	},
-};
+},
 
 exports.BattleItems = BattleItems;
